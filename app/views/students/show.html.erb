@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @student.name %>
+</p>
+
+<p>
+  <strong>Doc:</strong>
+  <%= @student.doc %>
+  
+  <%= link_to 'Download file Public', @student.doc.url, target: '_blank' %> |
+  <%= link_to 'Download file OPT - SendFile', student_download_send_file_path(@student), target: '_blank' %> |
+  <%= link_to 'Download file OPT - SendData', student_download_send_data_path(@student), target: '_blank' %> |
+  <%= link_to 'Download file OPT - SendData(nome_doc)', student_download_send_data_doc_path(@student, @student.doc.identifier), target: '_blank' %> 
+ 
+</p>
+
+<%= link_to 'Edit', edit_student_path(@student) %> |
+<%= link_to 'Back', students_path %>
