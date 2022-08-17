@@ -6,9 +6,13 @@
 </p>
 
 <p>
-  <strong>Doc:</strong>
-  <%= @student.doc %>
-  
+  <strong>URL:</strong> <%= @student.doc.url %><br>
+  <strong>Renderizando imagem local/sftp:</strong><br>
+  "/students/:student_id/download_send_data_doc/:doc"<br>
+  <%= image_tag student_download_send_data_doc_path(@student, @student.doc.identifier) %><br>
+  "/students/:student_id/download_send_data"<br>
+  <%= image_tag student_download_send_data_path(@student) %><br>
+  <strong>Doc:</strong><br>
   <%= link_to 'Download file Public', @student.doc.url, target: '_blank' %> |
   <%= link_to 'Download file OPT - SendFile', student_download_send_file_path(@student), target: '_blank' %> |
   <%= link_to 'Download file OPT - SendData', student_download_send_data_path(@student), target: '_blank' %> |
