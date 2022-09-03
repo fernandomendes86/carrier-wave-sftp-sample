@@ -1,5 +1,6 @@
 class StudentsController < ApplicationController
   before_action :set_student, only: %i[ show edit update destroy ]
+  #skip_before_action :verify_authenticity_token, only: [:update_status]
 
   # GET /students or /students.json
   def index
@@ -76,6 +77,16 @@ class StudentsController < ApplicationController
     send_data student.doc.read, filename: student.doc.identifier, type: student.doc.content_type, disposition: 'attachment' #'inline'
   end
 
+  def update_status
+    student = Student.find(params[:id])
+    if student.update(status: params['status'])
+      render json: {resp: "Salvo!", status: :ok}
+    else
+      render json: {resp: "Não salvo!", status: :unprocessable_entity }
+    end
+  end
+  
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_student
@@ -84,6 +95,6 @@ class StudentsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def student_params
-      params.require(:student).permit(:name, :doc)
+      params.require(:student).permit(:name, :doc, :status)
     end
 end

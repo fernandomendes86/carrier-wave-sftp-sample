@@ -21,7 +21,33 @@
     <%= form.file_field :doc %>
   </div>
 
+  <div class="field">
+    <%= form.label :status %>
+    <%= form.check_box :status %>
+  </div>
+
   <div class="actions">
     <%= form.submit %>
   </div>
 <% end %>
+
+<script>
+var student_id = "<%= student.id %>"
+$('#student_status').click(function() {
+  var checked; 
+  if ($(this).is(':checked')) {
+    checked = true;
+  } else {
+    checked = false;
+  } 
+  $.ajax({
+      type: "POST",
+      url: "/students/update_status",
+      data: { id: student_id, status: checked, authenticity_token: $('[name="csrf-token"]')[0].content },
+      success: function(res){
+        alert(res['resp']);
+      }
+      //data: { id: 23, status: checked, authenticity_token: document.querySelector('meta[name="csrf-token"]').content }
+   });     
+});
+</script>
