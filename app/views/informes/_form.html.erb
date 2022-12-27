@@ -1,0 +1,46 @@
+<%= form_with(model: informe, url: informes_salvar_form_path, local: true) do |form| %>
+  <% if informe.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(informe.errors.count, "error") %> prohibited this informe from being saved:</h2>
+
+      <ul>
+      <% informe.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :ano %>
+    <%= form.number_field :ano %>
+  </div>
+
+  <div class="field">
+    <%= form.label :doc_todos %>
+    <%= form.file_field :doc_todos, multiple: true %>
+  </div>
+  <hr>
+  Mensal
+  <hr>
+  <%= form.fields_for :valor_mensal_creditados do |f| %>
+    <div class="field">
+      <%= f.label :valor %>
+      <%= f.number_field :valor %>
+    </div>
+
+    <div class="field">
+      <%= f.label :mes %>
+      <%= f.number_field :mes %>
+    </div>
+
+    <div class="field">
+      <%= f.label :documentos %>
+      <%= f.file_field :documentos, multiple: true %>
+    </div>
+  <% end %> 
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
 
+  get 'informes/new'
+  get 'informes/show'
+  post 'informes/salvar_form'
+
   root to: 'students#index'
 
   resources :students do
